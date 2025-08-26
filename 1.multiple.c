@@ -1,29 +1,39 @@
 #include <stddef.h>
 #include <stdio.h>
 
-size_t sum_of_multiple(size_t limit);
+size_t sum_of_multiple(size_t n, size_t limit);
 
 int main() {
-  size_t result = sum_of_multiple(1000);
+  size_t limit = 1000;
+  size_t result = sum_of_multiple(3, limit) + sum_of_multiple(5, limit) -
+                  sum_of_multiple(3 * 5, limit);
+
   printf("Result: %ld\n", result);
   return 0;
 }
 
 /**
- * @brief Calculates the sum of all multiples of 3 or 5 below a given limit.
+ * @brief Calculates the sum of all natural numbers less than a given limit
+ *        that are divisible by a specified number.
  *
- * @param limit The upper bound (exclusive) for checking multiples
- * @return The sum of all natural numbers below `limit` that are divisible by 3
- * or 5.
+ * @param n     The number whose multiples will be summed.
+ * @param limit The upper bound (exclusive) for checking multiples.
+ * @return The sum of all natural numbers less than `limit` that are divisible
+ *         by `n`.
  *
+ * The multiples of `n` less than `limit` form an arithmetic sequence:
+ *     n, 2n, 3n, ..., kn  where k = (limit - 1) / n
+ *
+ * Factor out n: n × (1 + 2 + ... + k)
+ * Use formula:   1 + 2 + ... + k = k × (k + 1) / 2
+ * Final sum:     n × k × (k + 1) / 2
  */
-size_t sum_of_multiple(size_t limit) {
-  size_t sum = 0;
+size_t sum_of_multiple(size_t n, size_t limit) {
 
-  for (size_t i = 0; i < limit; ++i) {
-    if ((i % 3 == 0 || i % 5 == 0)) {
-      sum += i;
-    }
+  if (n == 0) {
+    return 0;
   }
-  return sum;
+
+  size_t count = (limit - 1) / n;
+  return n * count * (count + 1) / 2;
 }

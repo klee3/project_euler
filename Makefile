@@ -1,7 +1,6 @@
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -pedantic -std=c23 -O2
 LDFLAGS = -lm
-FILE = main.c
 OUT = app
 
 .PHONY: all build run clean
