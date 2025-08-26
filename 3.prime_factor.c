@@ -25,6 +25,10 @@ int main() {
  * @return The largest prime factor of `n`
  */
 size_t largest_prime_factor(size_t n) {
+  if (n == 0) {
+    return 0;
+  }
+
   size_t largest_factor = 0;
 
   while (n % 2 == 0) {
