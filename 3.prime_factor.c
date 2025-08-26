@@ -37,10 +37,14 @@ size_t largest_prime_factor(size_t n) {
   }
 
   /* handle the odd factor from 3 */
-  for (size_t i = 3; i <= (size_t)sqrt((double)n); i += 2) {
-    while (n % i == 0) {
-      largest_factor = i;
-      n /= i;
+  size_t factor = 3;
+  size_t max_factor = (size_t)sqrt((double)n);
+
+  for (; factor < max_factor && n > 1; factor += 2) {
+    while (n % factor == 0) {
+      largest_factor = factor;
+      n /= factor;
+      max_factor = (size_t)sqrt((double)n);
     }
   }
 
